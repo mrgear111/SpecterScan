@@ -20,11 +20,9 @@ function App() {
   const [currentView, setCurrentView] = useState<'upload' | 'results'>('upload');
   const [analysisData, setAnalysisData] = useState<AnalysisResponse | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
   const handleAnalyze = async (file: File) => {
     setIsAnalyzing(true);
-    setError(null);
 
     const formData = new FormData();
     formData.append('file', file);
@@ -45,7 +43,6 @@ function App() {
       setCurrentView('results');
     } catch (err: any) {
       console.error(err);
-      setError(err.message || 'An unexpected error occurred.');
       alert(err.message || 'An unexpected error occurred.');
     } finally {
       setIsAnalyzing(false);
